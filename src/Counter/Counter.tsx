@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import './Counter.css';
 
 const Counter = () => {
   const [counterValue, setCounterValue] = useState(0);
@@ -7,10 +8,27 @@ const Counter = () => {
   return (
     <div>
       <h3 data-testid="header">My Counter</h3>
-      <h2 data-testid='counter'>{counterValue}</h2>
-      <button data-testid='subtract-btn'>-</button>
-      <input style={{ textAlign: 'center' }} data-testid='input' type="number" defaultValue={inputValue} />
-      <button data-testid='add-btn'>+</button>
+      <h2
+        data-testid='counter'
+        className={`${counterValue > 99 ? "green" : ""}${counterValue < -99 ? "red" : ""}`}>{counterValue}</h2>
+
+      <button
+        data-testid='subtract-btn'
+        onClick={() => setCounterValue(counterValue - inputValue)}
+      >-</button>
+
+      <input
+        className='input-value'
+        data-testid='input'
+        type="number"
+        value={inputValue}
+        onChange={e => setInputValue(parseInt(e.target.value))}
+      />
+
+      <button
+        data-testid='add-btn'
+        onClick={() => setCounterValue(counterValue + inputValue)}
+      >+</button>
     </div>
   )
 }
